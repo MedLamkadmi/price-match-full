@@ -1,0 +1,7 @@
+rapidfuzz
+openpyxl
+pyyaml
+pillow
+requests
+beautifulsoup4
+lxml
