@@ -1,0 +1,21 @@
+# Unit conversions to canonical bases (grams for weight, mL for volume).
+# Step 5: "I convert measurements to a common base."
+weight_to_g:
+  g: 1.0
+  gram: 1.0
+  grams: 1.0
+  kg: 1000.0
+  oz: 28.3495
+  ounce: 28.3495
+  lb: 453.592
+  pound: 453.592
+volume_to_ml:
+  ml: 1.0
+  l: 1000.0
+  litre: 1000.0
+  liter: 1000.0
+  floz: 29.5735
+# Count/each units (kept as-is, compared as integers)
+count_units: [each, count, pack]
+# Roll equivalency is NOT a conversion (Step 10): 12=24 stays two fields.
+# Multipack "6x710 ml": count=6, unit_size=710 ml, total=4260 ml (Step 11).
