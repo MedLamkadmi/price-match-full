@@ -1,0 +1,79 @@
+# Retailers tracked each week. `role` drives Stage 2: one `home` = Superstore.
+#
+# Flyer discovery: `deal_template` builds the week's deal name, resolved via
+#   GET /api/v2/publications/search?deal_name=&retailer_id=&site_id=
+# Placeholders: {WW} = ISO week, {YYYY} = year.
+# `site_id` = store/zone number from any current flyer URL for that retailer.
+# `fc` = viewer code for full ADF offer extraction (else 50-item front-page fallback).
+# Metro/Food Basics use numeric deal IDs: set `deal_name` to the last known
+# number; the extractor auto-discovers the current week's by probing upward
+# (deal IDs increment). The ADF keys authenticate API calls but don't list
+# deals, so probing is the automatic path. `deal_probe_max` caps the search.
+retailers:
+  - name: Superstore
+    role: home
+    raddar_slug: real-canadian-superstore
+    site_id: "6885"
+    deal_template: "wk{WW}-{YYYY}-AB"
+    fc: ""
+  - name: Walmart
+    role: competitor
+    raddar_slug: walmart
+    site_id: "1160"
+    deal_template: "wk{WW}-{YYYY}-WM-IB"
+    fc: ""
+  - name: No Frills
+    role: competitor
+    raddar_slug: no-frills
+    site_id: "7087"
+    deal_template: "wk{WW}-{YYYY}-NF-IB"
+    fc: ""
+  - name: Sobeys
+    role: competitor
+    raddar_slug: sobeys
+    site_id: "4728"
+    deal_template: "WK{WW}-SOBEYS-MAX"
+    fc: ""
+  - name: Metro
+    role: competitor
+    raddar_slug: metro
+    site_id: "85"
+    deal_template: ""
+    deal_name: "84225"
+    fc: metro-ont-raddar
+  - name: FreshCo
+    role: competitor
+    raddar_slug: freshco
+    site_id: "9544"
+    deal_template: "wk{WW}-{YYYY}-FC-IB"
+    fc: ""
+  - name: Food Basics
+    role: competitor
+    raddar_slug: food-basics
+    site_id: "846"
+    deal_template: ""
+    deal_name: "84090"
+    fc: fb-raddar
+  - name: Loblaws
+    role: competitor
+    raddar_slug: loblaws
+    site_id: "1212"
+    deal_template: "wk{WW}-{YYYY}-LSL-SA"
+    fc: ""
+  - name: Costco
+    role: competitor
+    raddar_slug: costco-wholesale-canada
+    site_id: "535"
+    deal_template: "wk{WW}-{YYYY}"
+    fc: ""
+
+extractor:
+  source: raddar
+  region: "Brampton, ON"
+  postal_code: "K1P1J1"
+  lang: en
+  week_start_day: tuesday
+  request_delay_seconds: 1.5
+  timeout_seconds: 30
+  max_retries: 3
+  image_cache_dir: "data/image_cache"
