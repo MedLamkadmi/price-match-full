@@ -1,0 +1,26 @@
+# Abbreviation / synonym expansions applied before parsing & comparison.
+# "The understanding belongs in the dictionary, not the matcher."
+synonyms:
+  ea: each
+  e.a.: each
+  ct: count
+  ctn: count
+  pk: pack
+  pks: pack
+  lb: pound
+  lbs: pound
+  oz: ounce
+  pt: pint
+  pts: pint
+  lrg: large
+  lg: large
+  sml: small
+  med: medium
+  blsl: boneless
+  bsl: boneless
+  ww: whole wheat
+  ap: all purpose
+  multipack: multi pack
+  multipk: multi pack
+  rolls: tissue
+  roll: tissue
