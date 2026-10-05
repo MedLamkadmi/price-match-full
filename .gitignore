@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+data/image_cache/
+data/flyers_*.json
+output/
+.env
