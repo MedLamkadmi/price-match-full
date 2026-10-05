@@ -1,0 +1,63 @@
+# Brand dictionary — known brand tokens. Used to split brand from product/variant
+# and to evaluate brand-OR rules. Editable without touching code.
+# Private labels that FAIL exact brand matching are marked (Step 3: "Selection" fails).
+brands:
+  # Master-list brands (seeded from the 69 tracked items)
+  - Taylor Farms
+  - Cantaloupe
+  - Pepsi
+  - Coke
+  - Coca-Cola
+  - Prestige
+  - Danone
+  - Oikos
+  - Gallo
+  - Classico
+  - Ruffles
+  - Cashmere
+  - Royale
+  - Kawartha
+  - Bubly
+  - Robin Hood
+  - Five Roses
+  - Tide
+  - Timothy's
+  - Kicking Horse
+  - Gain
+  - Purex
+  - Allen's
+  - Schneiders
+  - Huggies
+  - Dr Oetker
+  - Dr. Oetker
+  - Ziploc
+  - Kraft
+  - Doritos
+  - Neilson
+  - Wonder
+  - PC
+  - President's Choice
+  - Chapmans
+  - Chapman's
+  - Tostitos
+  - Becel
+  - Country Harvest
+  - TruTaste
+  - Black Diamond
+  - Lactantia
+  - Prime Time
+  - Lay's
+  - Lays
+  - Gay Lea
+  - Janes
+  - Maple Leaf
+  - no name
+  - Farmers Market
+  - Quaker
+  - Redpath
+  # Common competitor private labels (known to exist; fail exact brand unless allowed)
+  - Selection
+  - Compliments
+  - Irresistibles
+  - Great Value
+  - Kirkland
