@@ -1,0 +1,48 @@
+# Matching engine settings — edit without touching code.
+# Philosophy (Ellie's GPT, Step 28): "Do not compare strings. Compare structured product attributes."
+# Philosophy (Step 24): uncertainty DOWNGrades, never upgrades. "Rather miss an EXACT than falsely claim one."
+
+# Product-name similarity gate (RapidFuzz token_set_ratio, 0-100).
+# Only a fallback inside the product gate for typos/word order — never the decision-maker.
+product_similarity_threshold: 85
+
+# Grade -> pipeline action
+grades:
+  EXACT: auto_accept        # primary price candidate
+  STRONG: review_queue      # Ellie confirms, reason shown
+  RELATED: show_as_collision # kept visible, never the primary price
+  NO_MATCH: skip
+
+# Size comparison tolerances
+size_tolerance_pct: 2.0          # normalized sizes within 2% count as equal
+material_equivalence_lb_g: true  # 454 g ~= 1 lb (453.592 g) when package format supports it (Step 5, 18)
+
+# "Commercially relevant" closeness for out-of-range sizes (Step 7, Ex.2) -> STRONG
+range_close_pct: 10.0
+
+# Price comparison defaults — from her price framework (Steps 8-20, second series).
+# Every price carries an ELIGIBILITY CLASS; compare like with like.
+# Class 1 — Unconditional: $3.99 each, $5.99/lb, 2/$7 where singles also $3.50
+# Class 2 — Quantity conditional: 2/$7 otherwise $4.99
+# Class 3 — Membership/app conditional: member $3.99, app $2.99
+# Class 4 — Multiple conditions: members only 3/$9
+price_policy:
+  public_price_priority: true     # Stage 1 winner = lowest UNCONDITIONAL comparable offer
+  allow_multibuy_as_primary: true # 2/$7 -> $3.50 ea., marked "buy 2", CAN compete (Step 17)
+  allow_member_price_as_primary: false  # member/app prices -> Other Collisions, never silent winners
+  allow_app_price_as_primary: false
+  # Display keeps conditions visible: "2/$7 ($3.50 ea.; must buy 2)", "2/$6 ($3.00 ea.; member price; buy 2)"
+  # Strict automation: different eligibility classes -> NOT DIRECTLY COMPARABLE (safer, Step 19)
+assumptions:
+  multi_buy_compare: effective_each  # compare $3.50 not $7; condition preserved in display
+  member_price_compare: non_member   # unconditional $4.99 for primary; $3.99 kept as conditional collision
+  per_weight_basis: kg               # $5.99/lb -> $13.21/kg before comparing (Step 19)
+  # A cheaper wrong-brand item never beats an exact tracked-brand offer (Step 26)
+
+# Stage 2 comparison labels (Superstore vs Stage-1 winner)
+stage2_labels:
+  cheaper: CHEAPER          # we win  (was: LOWER)
+  equal: EQUAL              # (was: EXACT)
+  more_expensive: MORE_EXPENSIVE  # flag for price drop (was: HIGHER - FLAG)
+  not_comparable: NOT_DIRECTLY_COMPARABLE
+  no_competitor: NO_COMPETITOR_MATCH
